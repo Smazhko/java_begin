@@ -46,4 +46,9 @@ public class seminar3_class {
 
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> dbeb5e4 (ДЗ 3: работа со списком)
