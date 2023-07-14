@@ -22,13 +22,13 @@ public class seminar3_class {
 
         int counter = 0;
         ListIterator<Integer> myLI = integers1.listIterator();
-        while(myLI.hasNext()){
+        while (myLI.hasNext()) {
 //            System.out.println(myLI.nextIndex());
 //            System.out.println(myLI.previousIndex());
 //            System.out.println(myLI.next());
 //            System.out.println("=======");
             myLI.next();
-            counter ++;
+            counter++;
             if (counter == 3) {
                 myLI.remove();
             }
@@ -45,10 +45,4 @@ public class seminar3_class {
         System.out.println(mySet);
 
     }
-
-<<<<<<< HEAD
 }
-=======
-}
-
->>>>>>> dbeb5e4 (ДЗ 3: работа со списком)

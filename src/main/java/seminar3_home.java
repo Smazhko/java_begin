@@ -1,5 +1,4 @@
 /*Урок 3. Коллекции JAVA: Введение
-Формат сдачи: ссылка на подписанный git-проект.
 
 Задание
 Пусть дан произвольный список целых чисел.
@@ -12,7 +11,6 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
 
 public class seminar3_home {
