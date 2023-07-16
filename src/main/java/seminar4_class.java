@@ -133,7 +133,7 @@ public class seminar4_class {
                 return Integer.parseInt(o1[0]) - Integer.parseInt(o2[0]);
             }
         });
-        //personsList.sort((o1, o2) -> o1[0].compareTo(o2[0])); //КОРОТКАЯ ЗАМЕНА ЛЯМБДОЙ
+        //personsList.sort((o1, o2) -> Integer.parseInt(o1[0]) - Integer.parseInt(o2[0])); //КОРОТКАЯ ЗАМЕНА ЛЯМБДОЙ
     }
 
 
