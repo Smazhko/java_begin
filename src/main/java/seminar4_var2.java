@@ -1,6 +1,15 @@
+/*
+Урок 4. Хранение и обработка данных ч1: приоритетные коллекции
+Организовать ввод и хранение данных пользователей. ФИО возраст, пол и выход из режима ввода информации
+вывод в формате Фамилия И.О. возраст пол
+добавить возможность выхода или вывода списка отсортированного по возрасту!)
+    *реализовать сортировку по возрасту с использованием индексов
+    *реализовать сортировку по возрасту и полу с использованием индексов
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class seminar4_var2 {
     public static void main(String[] args) {
@@ -60,6 +69,19 @@ public class seminar4_var2 {
                 "М",
                 "Ж",
                 "М"));
+        boolean breakFlag = false;
+        Scanner input = new Scanner(System.in);
+
+        while (!breakFlag){
+            System.out.print("Добавить новый элемент списка? (введите 1, если ДА, 0 - если НЕТ) ... ");
+            String userChoise = input.nextLine();
+            if (userChoise.contains("1")){
+                addRecord(surnamesList, namesList, fathersnamesList, ageList, genderList);
+            } else if (userChoise.contains("0")) {
+                breakFlag = true;
+            }
+        }
+
         System.out.println("СПИСОК БЕЗ СОРТИРОВКИ:");
         printList(surnamesList, namesList, fathersnamesList, ageList, genderList);
         System.out.println("СОРТИРОВКА ПО ФАМИЛИИ:");
@@ -73,6 +95,55 @@ public class seminar4_var2 {
         System.out.println("СОРТИРОВКА ПО ПОЛУ и ВОЗРАСТУ:");
         printList(surnamesList, namesList, fathersnamesList, ageList, genderList, byOrder(genderList, ageList));
 
+    }
+
+
+    public static void addRecord (List<String> surnamesLst,
+                                  List<String> namesLst,
+                                  List<String> fathersnamesLst,
+                                  List<String> ageLst,
+                                  List<String> genderLst){
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Введите Фамилию  : ");
+        String newSurname = input.nextLine();
+        if (!newSurname.isEmpty()){
+            newSurname = newSurname.substring(0,1).toUpperCase() + newSurname.substring(1).toLowerCase();
+        } else {
+            newSurname = "Инкогнито";
+        }
+
+        System.out.print("Введите Имя      : ");
+        String newName = input.nextLine();
+        if (!newName.isEmpty()){
+            newName = newName.substring(0,1).toUpperCase() + newName.substring(1).toLowerCase();
+        } else {
+            newName = "Мистер";
+        }
+
+        System.out.print("Введите Отчество : ");
+        String newFathersname = input.nextLine();
+        if (!newFathersname.isEmpty()){
+            newFathersname = newSurname.substring(0,1).toUpperCase() + newFathersname.substring(1).toLowerCase();
+        } else {
+            newFathersname = "Икс";
+        }
+
+        System.out.print("Введите возраст  : ");
+        String newAge = input.nextLine();
+        if (newAge.isEmpty()){
+            newAge = "25";
+        }
+        System.out.print("Введите пол      : ");
+        String newGender = input.nextLine();
+        if (newGender.isEmpty()){
+            newGender = "М";
+        }
+        surnamesLst.add(newSurname);
+        namesLst.add(newName);
+        fathersnamesLst.add(newFathersname);
+        ageLst.add(newAge);
+        genderLst.add(newGender);
     }
 
 
@@ -144,3 +215,91 @@ public class seminar4_var2 {
         System.out.println("-=".repeat(20) + "КОНЕЦ СПИСКА");
     }
 }
+
+/*
+Добавить новый элемент списка? (введите 1, если ДА, 0 - если НЕТ) ... 1
+Введите Фамилию  :
+Введите Имя      :
+Введите Отчество : oinoin
+Введите возраст  : 45
+Введите пол      : М
+Добавить новый элемент списка? (введите 1, если ДА, 0 - если НЕТ) ... 0
+СПИСОК БЕЗ СОРТИРОВКИ:
+Корнеева И.Е.        21  Ж
+Иванов Е.О.          23  М
+Кузнецова О.С.       29  Ж
+Гусарев С.В.         30  М
+Гончарова А.В.       30  Ж
+Панковецкий Н.В.     30  М
+Рыбакова Л.А.        29  Ж
+Кончаловский А.К.    23  М
+Дмитриева Д.Н.       22  Ж
+Жуковский Д.Ф.       34  М
+Инкогнито М.И.       45  М
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=КОНЕЦ СПИСКА
+СОРТИРОВКА ПО ФАМИЛИИ:
+Гончарова А.В.       30  Ж
+Гусарев С.В.         30  М
+Дмитриева Д.Н.       22  Ж
+Жуковский Д.Ф.       34  М
+Иванов Е.О.          23  М
+Инкогнито М.И.       45  М
+Кончаловский А.К.    23  М
+Корнеева И.Е.        21  Ж
+Кузнецова О.С.       29  Ж
+Панковецкий Н.В.     30  М
+Рыбакова Л.А.        29  Ж
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=КОНЕЦ СПИСКА
+СОРТИРОВКА ПО ВОЗРАСТУ:
+Корнеева И.Е.        21  Ж
+Дмитриева Д.Н.       22  Ж
+Иванов Е.О.          23  М
+Кончаловский А.К.    23  М
+Кузнецова О.С.       29  Ж
+Рыбакова Л.А.        29  Ж
+Гусарев С.В.         30  М
+Гончарова А.В.       30  Ж
+Панковецкий Н.В.     30  М
+Жуковский Д.Ф.       34  М
+Инкогнито М.И.       45  М
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=КОНЕЦ СПИСКА
+СОРТИРОВКА ПО ПОЛУ:
+Корнеева И.Е.        21  Ж
+Кузнецова О.С.       29  Ж
+Гончарова А.В.       30  Ж
+Рыбакова Л.А.        29  Ж
+Дмитриева Д.Н.       22  Ж
+Иванов Е.О.          23  М
+Гусарев С.В.         30  М
+Панковецкий Н.В.     30  М
+Кончаловский А.К.    23  М
+Жуковский Д.Ф.       34  М
+Инкогнито М.И.       45  М
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=КОНЕЦ СПИСКА
+СОРТИРОВКА ПО ПОЛУ и ФАМИЛИИ:
+Гончарова А.В.       30  Ж
+Дмитриева Д.Н.       22  Ж
+Корнеева И.Е.        21  Ж
+Кузнецова О.С.       29  Ж
+Рыбакова Л.А.        29  Ж
+Гусарев С.В.         30  М
+Жуковский Д.Ф.       34  М
+Иванов Е.О.          23  М
+Инкогнито М.И.       45  М
+Кончаловский А.К.    23  М
+Панковецкий Н.В.     30  М
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=КОНЕЦ СПИСКА
+СОРТИРОВКА ПО ПОЛУ и ВОЗРАСТУ:
+Корнеева И.Е.        21  Ж
+Дмитриева Д.Н.       22  Ж
+Кузнецова О.С.       29  Ж
+Рыбакова Л.А.        29  Ж
+Гончарова А.В.       30  Ж
+Иванов Е.О.          23  М
+Кончаловский А.К.    23  М
+Гусарев С.В.         30  М
+Панковецкий Н.В.     30  М
+Жуковский Д.Ф.       34  М
+Инкогнито М.И.       45  М
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=КОНЕЦ СПИСКА
+ */
