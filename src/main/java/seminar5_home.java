@@ -76,17 +76,19 @@ public static String[] inputNew(){
     printMessage("ДОБАВЛЕНИЕ  НОВОЙ  ЗАПИСИ");
     Scanner userInput = new Scanner(System.in);
 
+    //ввод данных из консоли с последующим удалением всех символов, кроме нужных
     System.out.print("Имя (ФИО) : ");
     String name = userInput.nextLine().replaceAll("[^0-9a-zA-Zа-яёА-ЯЁ\\. ]", "").strip(); // оставим в строке только буквы и пробелы и отрубим лишнее по краям
     System.out.print("телефон   : ");
     String phone = userInput.nextLine().replaceAll("[^\\(\\)0-9\\-\\+]", "").strip();// оставляем только цифры
 
-    if (name.length() == 0){
+    //если введенные данные пустые, то задаются значения по умолчанию
+    if (name.isEmpty()){
         name = "Неизвестный";
     } else {
         name = name.substring(0,1).toUpperCase() + name.substring(1);
     }
-    if (phone.length() == 0){phone = "- - -";}
+    if (phone.isEmpty()){phone = "- - -";}
 
 
     return new String[] {name, phone};
@@ -110,6 +112,7 @@ public static void printPhonebook(Map<String, List<String>> phonebook){
     int maxNameLength = 0;
     int maxPhoneLength = 0;
 
+    // вычисление максимально длинных имени и телефона
     for (var reccord: phonebook.entrySet()) {
         int currentNameLength = reccord.getKey().length();
         for (var phone: reccord.getValue()) {
@@ -122,10 +125,11 @@ public static void printPhonebook(Map<String, List<String>> phonebook){
             maxNameLength = currentNameLength;
         }
     }
-// ┌─┬─┐└─┴─┘│├─┼─┤
+    // шапка таблицы для печати
     System.out.println("┌" + "─".repeat(maxNameLength + 2) + "┬" + "─".repeat(maxPhoneLength + 2) + "┐");
     System.out.printf ("│ %-" + (maxNameLength) + "s │ %-" + (maxPhoneLength) + "s │\n", "ИМЯ", "ТЕЛЕФОН");
     System.out.println("├" + "─".repeat(maxNameLength + 2) + "┼" + "─".repeat(maxPhoneLength + 2) + "┤");
+
 
     int counter = 0;
     int lastRecord = phonebook.size();
@@ -133,8 +137,9 @@ public static void printPhonebook(Map<String, List<String>> phonebook){
         counter++;
         String name = reccord.getKey();
         List<String> phonesList = reccord.getValue();
-
         System.out.printf("│ %-" + maxNameLength + "s ", name);
+
+        //вывод телефонов каждой записи в столбик
         for (int i = 0; i< phonesList.size(); i++){
             if (i==0){
                 System.out.printf("│ %-" + maxPhoneLength + "s │\n", phonesList.get(i));
@@ -142,6 +147,8 @@ public static void printPhonebook(Map<String, List<String>> phonebook){
                 System.out.printf("│ " + " ".repeat( maxNameLength ) + " │ %-" + maxPhoneLength + "s │\n", phonesList.get(i));
             }
         }
+
+        //определение окончания или продолжения таблицы вывода для корректной прорисовки границ
         if (counter < lastRecord ) {
             System.out.println("├" + "─".repeat(maxNameLength + 2) + "┼" + "─".repeat(maxPhoneLength + 2) + "┤");
         } else {
